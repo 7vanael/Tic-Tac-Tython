@@ -5,6 +5,12 @@ class Board:
     PLAYER_X = "X"
     PLAYER_O = "O"
 
+    WIN_COMBINATIONS = [
+        (0, 1, 2), (3, 4, 5), (6, 7, 8),
+        (0, 3, 6), (1, 4, 7), (2, 5, 8),
+        (0, 4, 8), (2, 4, 6)
+    ]
+
     def __init__(self):
         self.cells = [self.EMPTY] * 9
 
@@ -18,3 +24,15 @@ class Board:
 
     def is_full(self) -> bool:
         return self.EMPTY not in self.cells
+
+    def winner(self):
+        for combination in self.WIN_COMBINATIONS:
+            a = combination[0]
+            b = combination[1]
+            c = combination[2]
+
+            if self.cells[a] != self.EMPTY:
+                if self.cells[a] == self.cells[b] and self.cells[b] == self.cells[c]:
+                    return self.cells[a]
+
+        return None

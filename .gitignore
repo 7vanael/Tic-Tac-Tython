@@ -2,3 +2,5 @@
 .coverage
 .idea/
 __pychache__/
+*.pyc
+*.pyo
