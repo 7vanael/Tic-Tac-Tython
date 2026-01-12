@@ -139,3 +139,13 @@ class TestTie:
         assert board.winner() is None
         assert board.is_full()
         assert board.is_end_state()
+
+class TestClearCell:
+    def test_empty_cell(self, board):
+        board.clear_cell(0)
+        assert board.cells[0] == Board.EMPTY
+
+    def test_occupied_cell(self, board):
+        board.cells[0] = Board.PLAYER_X
+        board.clear_cell(0)
+        assert board.cells[0] == Board.EMPTY

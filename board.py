@@ -38,3 +38,6 @@ class Board:
 
     def is_end_state(self) -> bool:
         return self.winner() is not None or self.is_full()
+
+    def clear_cell(self, index: int):
+        self.cells[index] = self.EMPTY
