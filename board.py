@@ -34,5 +34,7 @@ class Board:
             if self.cells[a] != self.EMPTY:
                 if self.cells[a] == self.cells[b] and self.cells[b] == self.cells[c]:
                     return self.cells[a]
-
         return None
+
+    def is_end_state(self) -> bool:
+        return self.winner() is not None or self.is_full()
