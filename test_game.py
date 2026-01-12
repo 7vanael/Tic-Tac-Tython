@@ -38,7 +38,7 @@ class TestHumanMove:
 
     def test_human_move_rejects_invalid_number(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['9', '-1', '0']),
+        with (patch('builtins.input', side_effect=['10', '-1', '1']),
               patch('builtins.print') as mock_print):
             move = game._human_move()
             assert move == 0
@@ -46,7 +46,7 @@ class TestHumanMove:
 
     def test_human_move_rejects_non_numeric_input(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['abc', 'x', '0']),
+        with (patch('builtins.input', side_effect=['abc', 'x', '1']),
               patch('builtins.print') as mock_print):
             move = game._human_move()
             assert move == 0
@@ -55,7 +55,7 @@ class TestHumanMove:
     def test_human_move_rejects_already_taken_position(self):
         game = Game()
         game.board.make_move(0, Board.PLAYER_X)
-        with (patch('builtins.input', side_effect=['0', '1']),
+        with (patch('builtins.input', side_effect=['1', '2']),
               patch('builtins.print') as mock_print):
             move = game._human_move()
             assert move == 1
@@ -65,7 +65,7 @@ class TestHumanMove:
 class TestPlay:
     def test_play_alternates_between_players(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['0', '3', '1', '4', '2']),
+        with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
               patch('game.render_board'),
               patch('builtins.print')):
             game.play()
@@ -78,7 +78,7 @@ class TestPlay:
 
     def test_play_renders_board_each_turn(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['0', '3', '1', '4', '2']),
+        with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
               patch('game.render_board') as mock_render,
               patch('builtins.print')):
             game.play()
@@ -87,7 +87,7 @@ class TestPlay:
 
     def test_play_displays_winner_when_x_wins(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['0', '3', '1', '4', '2']),
+        with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
               patch('game.render_board'),
               patch('builtins.print') as mock_print):
             game.play()
@@ -96,7 +96,7 @@ class TestPlay:
 
     def test_play_displays_winner_when_o_wins(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['3', '0', '4', '1', '6', '2']),
+        with (patch('builtins.input', side_effect=['4', '1', '5', '2', '7', '3']),
               patch('game.render_board'),
               patch('builtins.print') as mock_print):
             game.play()
@@ -105,7 +105,7 @@ class TestPlay:
 
     def test_play_displays_draw_when_board_full(self):
         game = Game()
-        moves = ['0', '2', '1', '3', '5', '4', '6', '8', '7']
+        moves = ['1', '3', '2', '4', '6', '5', '7', '9', '8']
         with (patch('builtins.input', side_effect=moves),
               patch('game.render_board'),
               patch('builtins.print') as mock_print):
@@ -115,7 +115,7 @@ class TestPlay:
 
     def test_play_ends_when_game_is_over(self):
         game = Game()
-        with (patch('builtins.input', side_effect=['0', '3', '1', '4', '2']),
+        with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
               patch('game.render_board'),
               patch('builtins.print')):
             game.play()
