@@ -1,8 +1,6 @@
 from board import Board
 from console import render_board
 
-
-
 class Game:
     def __init__(self):
         self.board = Board()
@@ -31,7 +29,7 @@ class Game:
     def _human_move(self) -> int:
         while True:
             try:
-                move = int(input("Choose a move (0-8): "))
+                move = int(input("Choose a move (1-9): ")) - 1
                 if move in self.board.available_moves():
                     return move
             except ValueError:
