@@ -15,7 +15,7 @@ class HardAI:
 
         for possible_move in board.available_moves():
             board.make_move(possible_move, self.ai_character)
-            score = self.minimax(board, is_maximizing=False)
+            score = self.minimax(board, depth=0, is_maximizing=False)
             board.clear_cell(possible_move)
 
             if score > best_score:
@@ -24,20 +24,15 @@ class HardAI:
 
         return move
 
-    def minimax(self, board: Board, is_maximizing: bool):
-        winner = board.winner()
-        if winner == self.ai_character:
-            return 1
-        if winner == self.opponent_character:
-            return -1
-        if board.is_full():
-            return 0
+    def minimax(self, board: Board, depth: int, is_maximizing: bool):
+        if board.is_end_state():
+            return self.calculate_terminal_score(board, depth)
 
         if is_maximizing:
             best_score = -math.inf
             for possible_move in board.available_moves():
-                board.make_move(possible_move, self.opponent_character)
-                score = self.minimax(board, is_maximizing=False)
+                board.make_move(possible_move, self.ai_character)
+                score = self.minimax(board, depth + 1, is_maximizing=False)
                 board.clear_cell(possible_move)
                 best_score = max(best_score, score)
             return best_score
@@ -45,8 +40,17 @@ class HardAI:
         else:
             best_score = math.inf
             for possible_move in board.available_moves():
-                board.make_move(possible_move, self.ai_character)
-                score = self.minimax(board, is_maximizing=True)
+                board.make_move(possible_move, self.opponent_character)
+                score = self.minimax(board, depth + 1, is_maximizing=True)
                 board.clear_cell(possible_move)
                 best_score = min(best_score, score)
             return best_score
+
+    def calculate_terminal_score(self, board: Board, depth: int) -> int:
+        winner = board.winner()
+        if winner == self.ai_character:
+            return 10 - depth
+        elif winner == self.opponent_character:
+            return depth - 10
+        else:
+            return 0
