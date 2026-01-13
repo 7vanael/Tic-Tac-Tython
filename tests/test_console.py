@@ -1,6 +1,5 @@
-import pytest
-from board import Board
-from console import render_board, render_welcome
+from tic_tac_toe.board import Board
+from tic_tac_toe.console import render_board, render_welcome
 
 
 def test_print_output(capsys):

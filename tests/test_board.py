@@ -1,5 +1,5 @@
 import pytest
-from board import Board
+from tic_tac_toe.board import Board
 
 @pytest.fixture
 def board():

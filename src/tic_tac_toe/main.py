@@ -1,10 +1,11 @@
-from board import Board
-from console import render_welcome, render_board
+from tic_tac_toe.console import render_welcome
+from tic_tac_toe.game import Game
+
 
 def main():
     render_welcome()
-    board = Board()
-    render_board(board)
+    game = Game()
+    game.play()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
