@@ -1,11 +1,16 @@
+from typing import List
 
 
 def render_welcome():
-    print('Welcome to Tic-Tac-Tython!\n Let\'s begin:  ')
+    print('Welcome to Tic-Tac-Tython!\n Let\'s play!')
+
+def interleave_numbers(cells) ->List[str]:
+    return [str(i + 1) if c == " " else c for i, c in enumerate(cells)]
 
 def render_board(board):
-    print("1 | 2 | 3")
-    print("---------")
-    print("4 | 5 | 6")
-    print("---------")
-    print("7 | 8 | 9")
+    display = interleave_numbers(board.cells)
+    for i in range(0, 9, 3):
+        print(" | ".join(display[i:i + 3]))
+        if i < 6:
+            print("---------")
+    print()
