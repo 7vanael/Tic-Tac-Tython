@@ -1,14 +1,15 @@
 import pytest
 from tic_tac_toe.board import Board
 
+
 @pytest.fixture
 def board():
     return Board()
 
-class TestBoardInitialization:
-    def test_new_board_has_9_empty_cells(self, board):
-        assert len(board.cells) == 9
-        assert all(cell == Board.EMPTY for cell in board.cells)
+def test_new_board_has_9_empty_cells():
+    board = Board()
+    assert len(board.cells) == 9
+    assert all(cell == Board.EMPTY for cell in board.cells)
 
 
 class TestAvailableMoves:
@@ -106,9 +107,9 @@ class TestWinner:
         assert board.is_end_state()
 
     def test_win_combinations(self, board):
-        Board.WIN_COMBINATIONS = [(0, 1, 2), (3, 4, 5), (6, 7, 8),
-                                  (0, 3, 6), (1, 4, 7), (2, 5, 8),
-                                  (0, 4, 8), (2, 4, 6)]
+        assert Board.WIN_COMBINATIONS == [(0, 1, 2), (3, 4, 5), (6, 7, 8),
+                                          (0, 3, 6), (1, 4, 7), (2, 5, 8),
+                                          (0, 4, 8), (2, 4, 6)]
 
     @pytest.mark.parametrize("combo", Board.WIN_COMBINATIONS)
     @pytest.mark.parametrize("player", [Board.PLAYER_X, Board.PLAYER_O])
@@ -129,6 +130,7 @@ class TestWinner:
         assert board.winner() is None
         assert board.is_end_state()
 
+
 class TestTie:
     def test_full_board_no_winner(self, board):
         board.cells = [
@@ -139,6 +141,7 @@ class TestTie:
         assert board.winner() is None
         assert board.is_full()
         assert board.is_end_state()
+
 
 class TestClearCell:
     def test_empty_cell(self, board):

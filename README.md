@@ -38,7 +38,7 @@ Or for development mode:
 
 To play the game:
 
-`python -m tic_tac_toe.main`
+`tic-tac-tython`
 
 ## Development
 
