@@ -1,5 +1,5 @@
-from tic_tac_toe.game import Game
-from tic_tac_toe.board import Board
+from game import Game
+from board import Board
 from unittest.mock import patch
 
 
@@ -65,7 +65,7 @@ class TestPlay:
     def test_play_alternates_between_players(self):
         game = Game()
         with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
-              patch('tic_tac_toe.game.render_board'),
+              patch('game.render_board'),
               patch('builtins.print')):
             game.play()
 
@@ -78,7 +78,7 @@ class TestPlay:
     def test_play_renders_board_each_turn(self):
         game = Game()
         with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
-              patch('tic_tac_toe.game.render_board') as mock_render,
+              patch('game.render_board') as mock_render,
               patch('builtins.print')):
             game.play()
 
@@ -87,7 +87,7 @@ class TestPlay:
     def test_play_displays_winner_when_x_wins(self):
         game = Game()
         with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
-              patch('tic_tac_toe.game.render_board'),
+              patch('game.render_board'),
               patch('builtins.print') as mock_print):
             game.play()
 
@@ -96,7 +96,7 @@ class TestPlay:
     def test_play_displays_winner_when_o_wins(self):
         game = Game()
         with (patch('builtins.input', side_effect=['4', '1', '5', '2', '7', '3']),
-              patch('tic_tac_toe.game.render_board'),
+              patch('game.render_board'),
               patch('builtins.print') as mock_print):
             game.play()
 
@@ -106,7 +106,7 @@ class TestPlay:
         game = Game()
         moves = ['1', '3', '2', '4', '6', '5', '7', '9', '8']
         with (patch('builtins.input', side_effect=moves),
-              patch('tic_tac_toe.game.render_board'),
+              patch('game.render_board'),
               patch('builtins.print') as mock_print):
             game.play()
 
@@ -115,7 +115,7 @@ class TestPlay:
     def test_play_ends_when_game_is_over(self):
         game = Game()
         with (patch('builtins.input', side_effect=['1', '4', '2', '5', '3']),
-              patch('tic_tac_toe.game.render_board'),
+              patch('game.render_board'),
               patch('builtins.print')):
             game.play()
 
@@ -124,7 +124,7 @@ class TestPlay:
     def test_play_calls_human_move_for_each_turn(self):
         game = Game()
         with (patch.object(game, '_human_move', side_effect=[0, 3, 1, 4, 2]) as mock_human_move,
-              patch('tic_tac_toe.game.render_board'),
+              patch('game.render_board'),
               patch('builtins.print')):
             game.play()
 

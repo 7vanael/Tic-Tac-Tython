@@ -1,5 +1,5 @@
-from tic_tac_toe.board import Board
-from tic_tac_toe.console import render_board
+from board import Board
+from console import render_board
 
 class Game:
     def __init__(self):

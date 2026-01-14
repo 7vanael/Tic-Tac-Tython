@@ -1,16 +1,10 @@
 import pytest
-from tic_tac_toe.board import Board
+from board import Board
 
 
 @pytest.fixture
 def board():
     return Board()
-
-def test_new_board_has_9_empty_cells():
-    board = Board()
-    assert len(board.cells) == 9
-    assert all(cell == Board.EMPTY for cell in board.cells)
-
 
 class TestAvailableMoves:
     def test_new_board_has_all_positions_available(self, board):
@@ -19,6 +13,7 @@ class TestAvailableMoves:
     def test_board_with_one_move_has_eight_available(self, board):
         board.cells[0] = Board.PLAYER_X
         assert board.available_moves() == [1, 2, 3, 4, 5, 6, 7, 8]
+        assert 0 not in board.available_moves()
 
     def test_board_with_scattered_moves(self, board):
         board.cells[1] = Board.PLAYER_X

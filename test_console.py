@@ -1,6 +1,6 @@
 import pytest
-from tic_tac_toe.board import Board
-from tic_tac_toe.console import render_board, render_welcome, interleave_numbers
+from board import Board
+from console import render_board, render_welcome, interleave_numbers
 
 @pytest.fixture
 def board():

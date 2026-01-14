@@ -15,7 +15,11 @@ class Board:
         self.cells = [self.EMPTY] * 9
 
     def available_moves(self) -> List[int]:
-        return [i for i, cell in enumerate(self.cells) if cell == self.EMPTY]
+        moves = []
+        for i in range(len(self.cells)):
+            if self.cells[i] == self.EMPTY:
+                moves.append(i)
+        return moves
 
     def make_move(self, index: int, player: str):
         if index not in self.available_moves():
