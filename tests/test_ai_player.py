@@ -1,6 +1,6 @@
 import pytest
 from tic_tac_toe.board import Board
-from tic_tac_toe.ai_player import HardAI
+from tic_tac_toe.player.ai_player import HardAI
 
 
 @pytest.fixture
@@ -76,7 +76,7 @@ class TestHardAI:
             " ", "O", " ",
             " ", " ", " "
         ]
-        move = ai_o.best_move(board)
+        move = ai_o.get_move(board)
         assert move == 2
 
 
@@ -86,7 +86,7 @@ class TestHardAI:
             "X", "X", " ",
             " ", " ", " "
         ]
-        move = ai_o.best_move(board)
+        move = ai_o.get_move(board)
         assert move == 2
 
 
@@ -96,16 +96,16 @@ class TestHardAI:
             "X", "O", " ",
             "O", "X", " "
         ]
-        move = ai_o.best_move(board)
+        move = ai_o.get_move(board)
         assert move in board.available_moves()
 
     def test_ai_takes_corner_to_open(self, board, ai_o):
-        move = ai_o.best_move(board)
+        move = ai_o.get_move(board)
         assert move in {0, 2, 6, 8}
 
     def test_ai_takes_center_if_x_opens_corner(self, board, ai_o):
         board.cells[0] = "X"
-        move = ai_o.best_move(board)
+        move = ai_o.get_move(board)
         assert move == 4
 
 
@@ -115,10 +115,10 @@ class TestHardAI:
             " ", "O", " ",
             " ", " ", "X"
         ]
-        move = ai_o.best_move(board)
+        move = ai_o.get_move(board)
         assert move in {1, 3, 5, 7}
 
     def test_ai_does_not_mutate_board(self, board, ai_o):
         original = board.cells.copy()
-        ai_o.best_move(board)
+        ai_o.get_move(board)
         assert board.cells == original

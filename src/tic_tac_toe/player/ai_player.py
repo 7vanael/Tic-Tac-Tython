@@ -1,19 +1,21 @@
 import math
 from tic_tac_toe.board import Board
+from tic_tac_toe.player.player import Player
 
-class HardAI:
-    def __init__(self, ai_character: str):
-        self.ai_character = ai_character
+
+class HardAI(Player):
+    def __init__(self, character: str):
+        super().__init__(character)
         self.opponent_character = (
-            Board.PLAYER_O if ai_character == Board.PLAYER_X else Board.PLAYER_X
+            Board.PLAYER_O if character == Board.PLAYER_X else Board.PLAYER_X
         )
 
-    def best_move(self, board: Board):
+    def get_move(self, board: Board) -> int:
         best_score = -math.inf
         move = None
 
         for possible_move in board.available_moves():
-            board.make_move(possible_move, self.ai_character)
+            board.make_move(possible_move, self.character)
             score = self.minimax(board, depth=0, is_maximizing=False)
             board.clear_cell(possible_move)
 
@@ -30,7 +32,7 @@ class HardAI:
         if is_maximizing:
             best_score = -math.inf
             for possible_move in board.available_moves():
-                board.make_move(possible_move, self.ai_character)
+                board.make_move(possible_move, self.character)
                 score = self.minimax(board, depth + 1, is_maximizing=False)
                 board.clear_cell(possible_move)
                 best_score = max(best_score, score)
@@ -47,7 +49,7 @@ class HardAI:
 
     def calculate_terminal_score(self, board: Board, depth: int) -> int:
         winner = board.winner()
-        if winner == self.ai_character:
+        if winner == self.character:
             return 10 - depth
         elif winner == self.opponent_character:
             return depth - 10
