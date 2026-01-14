@@ -20,25 +20,30 @@ If not installed, you have a couple options:
 
 Download and install [Python](https://www.python.org/downloads/) using the installation wizard.
 
-### Get the Game
+### Install the Game
 
 Clone the repository:
 ```
-git clone https://github.com/7vanael/tic-tac-tython.git
+git clone https://github.com/yourusername/tic-tac-tython.git
 cd tic-tac-tython
 ```
 
+Install the package:
+`pip install .`
+
+Or for development mode:
+`pip install -e '.[dev]'`
 
 ## Usage
 
 To play the game:
 
-`python main.py`
+`tic-tac-tython`
 
 ## Development
 
-For development dependencies:
-`pip install -r requirements`
+### Install Development Dependencies
+`pip install -e '.[dev]'`
 
 ### Running Tests
 
@@ -49,3 +54,9 @@ Run all tests:
 Run a specific test file:
 
 `pytest tests/test_board.py -v`
+
+### Development
+
+To import and install test dependencies, run:
+`python -m pip install -e '.[dev]'`
+

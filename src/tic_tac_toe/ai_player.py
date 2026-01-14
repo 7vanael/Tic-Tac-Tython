@@ -1,5 +1,5 @@
 import math
-from board import Board
+from tic_tac_toe.board import Board
 
 class HardAI:
     def __init__(self, ai_character: str):

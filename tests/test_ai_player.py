@@ -1,6 +1,6 @@
 import pytest
-from board import Board
-from ai_player import HardAI
+from tic_tac_toe.board import Board
+from tic_tac_toe.ai_player import HardAI
 
 
 @pytest.fixture

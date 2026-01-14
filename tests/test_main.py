@@ -1,19 +1,12 @@
-import pytest
+import unittest
 from unittest.mock import patch, call, Mock
-from main import main
+
+from tic_tac_toe.main import main
 
 
-@pytest.fixture
-def mock_welcome():
-    with patch('main.render_welcome') as mock:
-        yield mock
-
-@pytest.fixture
-def mock_game_class():
-    with patch('main.Game') as mock:
-        yield mock
-
-class TestMain:
+class TestMain(unittest.TestCase):
+    @patch('tic_tac_toe.main.Game')
+    @patch('tic_tac_toe.main.render_welcome')
     def test_main_calls_functions_in_order(self, mock_welcome, mock_game_class):
         mock_game_instance = mock_game_class.return_value
 
@@ -24,6 +17,8 @@ class TestMain:
         mock_game_instance.play.assert_called_once()
 
 
+    @patch('tic_tac_toe.main.Game')
+    @patch('tic_tac_toe.main.render_welcome')
     def test_main_call_order(self, mock_welcome, mock_game_class):
             mock_game_instance = mock_game_class.return_value
             manager = Mock()
