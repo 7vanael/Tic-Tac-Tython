@@ -1,5 +1,5 @@
 from tests.conftest import game_x_win
-from tic_tac_toe.board import Board
+from board import Board
 
 def test_game_initialization(game_x_win):
     game, _ = game_x_win

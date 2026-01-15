@@ -1,6 +1,6 @@
 import math
-from tic_tac_toe.board import Board
-from tic_tac_toe.player.player import Player
+from board import Board
+from player import Player
 
 
 class HardAI(Player):

@@ -1,10 +1,10 @@
 from unittest.mock import MagicMock, patch
 import pytest
-from tic_tac_toe.player.ai_player import HardAI
-from tic_tac_toe.player.human_player import HumanPlayer
+from player_ai import HardAI
+from player_human import HumanPlayer
 from tests.conftest import EmptyFakePlayer
-from tic_tac_toe.player_factory import PlayerFactory
-from tic_tac_toe.board import Board
+from player_factory import PlayerFactory
+from board import Board
 
 
 @pytest.fixture
@@ -41,7 +41,7 @@ def test_create_player_unknown_type_raises(factory):
 def test_create_players_human_vs_hard_ai(factory, notifier):
     notifier.select_player_type.side_effect = ["Human", "Fake Player"]
     options = {"Human": HumanPlayer, "Hard AI": HardAI, "Fake Player": EmptyFakePlayer}
-    with patch('tic_tac_toe.player_factory.PlayerFactory.PLAYER_TYPES', options):
+    with patch('player_factory.PlayerFactory.PLAYER_TYPES', options):
         players = factory.create_players()
 
         notifier.select_player_type.assert_any_call(Board.PLAYER_X, options)

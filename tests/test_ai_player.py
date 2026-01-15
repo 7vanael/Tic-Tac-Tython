@@ -1,7 +1,7 @@
 from unittest.mock import MagicMock
 import pytest
-from tic_tac_toe.board import Board
-from tic_tac_toe.player.ai_player import HardAI
+from board import Board
+from player_ai import HardAI
 
 
 @pytest.fixture

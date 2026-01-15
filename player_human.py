@@ -1,5 +1,5 @@
-from tic_tac_toe.board import Board
-from tic_tac_toe.player.player import Player
+from board import Board
+from player import Player
 
 
 class HumanPlayer(Player):
@@ -13,4 +13,4 @@ class HumanPlayer(Player):
                     return move
             except ValueError:
                 pass
-            self.notifier.notify_invalid_move(self.character, board)
+            self.notifier.notify_invalid_move()

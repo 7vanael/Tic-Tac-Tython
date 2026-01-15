@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import patch
-from tic_tac_toe.board import Board
-from tic_tac_toe.console import CliNotifier
+from board import Board
+from console import CliNotifier
 from tests.conftest import FakePlayer
 
 @pytest.fixture
@@ -56,6 +56,22 @@ class TestInterleaveNumbers:
         " ", "X", " ",
     ]
         assert notify._interleave_numbers(board.cells) == ["X", "O", "X", "4", "O", "6", "7", "X", "9"]
+
+class TestNotifyWinner:
+    def test_print_no_winner(self,capsys, notify):
+        notify.notify_winner(None)
+        captured = capsys.readouterr()
+        assert captured.out == "Draw!\n"
+
+    def test_print_x_winner(self,capsys, notify):
+        notify.notify_winner(Board.PLAYER_X)
+        captured = capsys.readouterr()
+        assert captured.out == "Winner: X!\nGood game!\n"
+
+    def test_print_o_winner(self,capsys, notify):
+        notify.notify_winner(Board.PLAYER_O)
+        captured = capsys.readouterr()
+        assert captured.out == "Winner: O!\nGood game!\n"
 
 
 def test_print_empty_board(capsys, board, notify):

@@ -1,6 +1,6 @@
-from tic_tac_toe.board import Board
-from tic_tac_toe.player.player import Player
-from tic_tac_toe.console import CliNotifier
+from board import Board
+from player import Player
+from console import CliNotifier
 
 class Game:
     def __init__(self, board: Board, players: dict[str, Player], notifier: CliNotifier):

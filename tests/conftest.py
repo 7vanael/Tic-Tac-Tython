@@ -1,8 +1,8 @@
 import pytest
-from unittest.mock import Mock, MagicMock
-from tic_tac_toe.board import Board
-from tic_tac_toe.game import Game
-from tic_tac_toe.player.player import Player
+from unittest.mock import MagicMock
+from board import Board
+from game import Game
+from player import Player
 
 @pytest.fixture
 def notifier():

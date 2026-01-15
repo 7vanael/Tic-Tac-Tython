@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from tic_tac_toe.board import Board
+from board import Board
 
 
 class Player(ABC):

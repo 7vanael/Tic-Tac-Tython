@@ -1,27 +1,27 @@
 import pytest
 from unittest.mock import patch
-from tic_tac_toe.main import main
+from main import main
 from tests.conftest import FakePlayer
 
 
 @pytest.fixture
 def mock_notifier():
-    with patch('tic_tac_toe.main.CliNotifier') as MockNotifier:
+    with patch('main.CliNotifier') as MockNotifier:
         yield MockNotifier
 
 @pytest.fixture
 def mock_game_class():
-    with patch('tic_tac_toe.main.Game') as MockGame:
+    with patch('main.Game') as MockGame:
         yield MockGame
 
 @pytest.fixture
 def mock_player_factory():
-    with patch('tic_tac_toe.main.PlayerFactory') as MockPlayerFactory:
+    with patch('main.PlayerFactory') as MockPlayerFactory:
         yield MockPlayerFactory
 
 @pytest.fixture
 def mock_board():
-    with patch('tic_tac_toe.main.Board') as MockBoard:
+    with patch('main.Board') as MockBoard:
         yield MockBoard
 
 class TestMain:

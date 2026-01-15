@@ -1,7 +1,7 @@
 import pytest
-from unittest.mock import patch, MagicMock
-from tic_tac_toe.player.human_player import HumanPlayer
-from tic_tac_toe.board import Board
+from unittest.mock import MagicMock
+from player_human import HumanPlayer
+from board import Board
 
 @pytest.fixture
 def notifier():
@@ -43,5 +43,5 @@ class TestHumanMove:
         notifier.prompt_for_move.side_effect = ["1", "2"]
         move = human_x.select_move(board)
         assert move == 1
-        notifier.notify_invalid_move.assert_called_once_with(Board.PLAYER_X, board)
+        notifier.notify_invalid_move.assert_called_once()
         notifier.announce_move.assert_called_once_with(Board.PLAYER_X, 1)

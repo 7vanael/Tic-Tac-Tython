@@ -1,7 +1,5 @@
 from typing import List
 
-from tic_tac_toe.board import Board
-
 
 class CliNotifier:
     @staticmethod
@@ -43,7 +41,7 @@ class CliNotifier:
     @staticmethod
     def notify_winner(winner: str | None):
         if winner:
-            print(f"Winner: {winner}")
+            print(f"Winner: {winner}!\nGood game!")
         else:
             print("Draw!")
 

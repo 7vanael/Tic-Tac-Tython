@@ -1,6 +1,6 @@
-from tic_tac_toe.board import Board
-from tic_tac_toe.player.ai_player import HardAI
-from tic_tac_toe.player.human_player import HumanPlayer
+from board import Board
+from player_ai import HardAI
+from player_human import HumanPlayer
 
 
 class PlayerFactory:
@@ -27,8 +27,3 @@ class PlayerFactory:
             raise ValueError(f"Unknown player type: {player_type}")
 
         return player_class(symbol, self.notifier)
-
-    def get_player_type_options(self):
-        return {
-            key: key for key in self.PLAYER_TYPES.items()
-        }
