@@ -72,3 +72,25 @@ def test_print_full_board(capsys, board, notify):
     notify.render_board(board)
     captured = capsys.readouterr()
     assert captured.out == "X | O | X\n---------\nX | X | O\n---------\nO | X | O\n\n"
+
+def test_prompt_for_move_returns_input(notify, board):
+    with patch("builtins.input", return_value="5") as mock_input:
+        result = notify.prompt_for_move(Board.PLAYER_X)
+        mock_input.assert_called_once_with("X, choose a move (1-9): ")
+        assert result == "5"
+
+def test_prompt_for_move_returns_any_input(notify, board):
+    with patch("builtins.input", return_value="") as mock_input:
+        result = notify.prompt_for_move(Board.PLAYER_X)
+        mock_input.assert_called_once_with("X, choose a move (1-9): ")
+        assert result == ""
+
+def test_notify_invalid_move_prints_message(capsys, notify):
+    notify.notify_invalid_move()
+    captured = capsys.readouterr()
+    assert captured.out == "Invalid move. Please enter a valid move.\n"
+
+def test_announce_move_announces_player_move_plus_1(capsys, notify):
+    notify.announce_move(Board.PLAYER_X, 3)
+    captured = capsys.readouterr()
+    assert captured.out == "X chose move 4\n\n"

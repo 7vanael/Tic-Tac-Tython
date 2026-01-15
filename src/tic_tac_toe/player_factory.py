@@ -26,10 +26,9 @@ class PlayerFactory:
         except KeyError:
             raise ValueError(f"Unknown player type: {player_type}")
 
-        return player_class(symbol)
+        return player_class(symbol, self.notifier)
 
     def get_player_type_options(self):
         return {
-            key: info["label"]
-            for key, info in self.PLAYER_TYPES.items()
+            key: key for key in self.PLAYER_TYPES.items()
         }

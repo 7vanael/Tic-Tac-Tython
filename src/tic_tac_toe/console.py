@@ -1,5 +1,8 @@
 from typing import List
 
+from tic_tac_toe.board import Board
+
+
 class CliNotifier:
     @staticmethod
     def render_welcome():
@@ -43,3 +46,14 @@ class CliNotifier:
             print(f"Winner: {winner}")
         else:
             print("Draw!")
+
+    def prompt_for_move(self, character: str) -> str:
+        return input(f"{character}, choose a move (1-9): ")
+
+    @staticmethod
+    def notify_invalid_move():
+        print("Invalid move. Please enter a valid move.")
+
+    @staticmethod
+    def announce_move(character: str, move: int):
+        print(f"{character} chose move {move + 1}\n")

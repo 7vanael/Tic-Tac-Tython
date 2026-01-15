@@ -4,13 +4,13 @@ from tic_tac_toe.player.player import Player
 
 
 class HardAI(Player):
-    def __init__(self, character: str):
-        super().__init__(character)
+    def __init__(self, character: str, notifier):
+        super().__init__(character, notifier)
         self.opponent_character = (
             Board.PLAYER_O if character == Board.PLAYER_X else Board.PLAYER_X
         )
 
-    def get_move(self, board: Board) -> int:
+    def select_move(self, board: Board) -> int:
         best_score = -math.inf
         move = None
 
@@ -22,7 +22,7 @@ class HardAI(Player):
             if score > best_score:
                 best_score = score
                 move = possible_move
-
+        self.notifier.announce_move(self.character, move)
         return move
 
     def minimax(self, board: Board, depth: int, is_maximizing: bool):

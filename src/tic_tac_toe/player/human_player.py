@@ -3,12 +3,14 @@ from tic_tac_toe.player.player import Player
 
 
 class HumanPlayer(Player):
-    def get_move(self, board: Board) -> int:
+    def select_move(self, board: Board) -> int:
         while True:
             try:
-                move = int(input("Choose a move (1-9): ")) - 1
+                choice = self.notifier.prompt_for_move(self.character)
+                move = int(choice) - 1
                 if move in board.available_moves():
+                    self.notifier.announce_move(self.character, move)
                     return move
             except ValueError:
                 pass
-            print("Invalid move. Try again.")
+            self.notifier.notify_invalid_move(self.character, board)

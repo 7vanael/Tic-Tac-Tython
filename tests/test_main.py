@@ -31,8 +31,8 @@ class TestMain:
         mock_factory_instance = mock_player_factory.return_value
         mock_board_instance = mock_board.return_value
 
-        fake_player_x = FakePlayer("X", [1, 2, 3])
-        fake_player_o = FakePlayer("O", [4, 5, 6])
+        fake_player_x = FakePlayer("X",mock_notifier_instance, [1, 2, 3])
+        fake_player_o = FakePlayer("O", mock_notifier_instance,[4, 5, 6])
         mock_factory_instance.create_players.return_value = {"X": fake_player_x, "O": fake_player_o}
 
         main()

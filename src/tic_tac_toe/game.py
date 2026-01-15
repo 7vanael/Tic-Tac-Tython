@@ -13,7 +13,7 @@ class Game:
         while not self.board.is_end_state():
             self.notifier.render_board(self.board)
             player = self.players[self.current_player]
-            move = player.get_move(self.board)
+            move = player.select_move(self.board)
             self.board.make_move(move, self.current_player)
             self.current_player = (
                 Board.PLAYER_O if self.current_player == Board.PLAYER_X else Board.PLAYER_X
