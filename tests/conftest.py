@@ -4,6 +4,13 @@ from tic_tac_toe.board import Board
 from tic_tac_toe.game import Game
 from tic_tac_toe.player.player import Player
 
+
+class EmptyFakePlayer(Player):
+    def __init__(self, character: str):
+        super().__init__(character)
+    def get_move(self, board: Board):
+        return 0
+
 class FakePlayer(Player):
     def __init__(self, character: str, moves):
         super().__init__(character)

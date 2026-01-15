@@ -5,14 +5,14 @@ class CliNotifier:
     def render_welcome():
         print('Welcome to Tic-Tac-Tython!\n Let\'s play!')
 
-    def select_player_type(self, symbol: str, options: dict[str, str]) -> str:
+    def select_player_type(self, symbol: str, options: dict[str, type]) -> str:
         keys = list(options.keys())
         while True:
-            self._display_player_options(options, keys, symbol)
+            self._display_player_options(keys, symbol)
             print(f"Enter selection: ", end="")
             try:
                 index = int(input()) - 1
-                if 0 <= index < len(options):
+                if 0 <= index < len(keys):
                     return keys[index]
             except ValueError:
                 pass
@@ -20,10 +20,10 @@ class CliNotifier:
             print(f"Invalid choice. Please enter a number between 1 and {len(keys)}.")
 
     @staticmethod
-    def _display_player_options(options: dict, keys: list, symbol: str):
+    def _display_player_options(keys: list, symbol: str):
         print(f"Enter a number to select player type for {symbol}:")
         for i, key in enumerate(keys, start=1):
-            print(f"{i}. {options[key]}")
+            print(f"{i}. {key}")
 
     @staticmethod
     def _interleave_numbers(cells) ->List[str]:

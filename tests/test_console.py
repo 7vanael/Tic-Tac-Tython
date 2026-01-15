@@ -2,6 +2,7 @@ import pytest
 from unittest.mock import patch
 from tic_tac_toe.board import Board
 from tic_tac_toe.console import CliNotifier
+from tests.conftest import FakePlayer
 
 @pytest.fixture
 def board():
@@ -17,18 +18,19 @@ def test_print_output(capsys, notify):
 
 class TestSelectPlayerType:
     def test_select_player_type_returns_correct_choice(self, capsys, notify):
-        with patch("builtins.input", side_effect=["foo", "-4", "* 0", " human  ", "1"]):
-            choice = notify.select_player_type(Board.PLAYER_X, {"human": "Human", "ai_hard": "Hard AI"})
+        with patch("builtins.input", side_effect=["foo", "-4", "* 0", " human  ", "0", "3", "", " ", "1"]):
+            choice = notify.select_player_type(Board.PLAYER_X, {"Human": FakePlayer, "Hard AI": FakePlayer})
 
-        assert choice == "human"
+        assert choice == "Human"
 
         captured = capsys.readouterr()
         invalid_message = "Invalid choice. Please enter a number between 1 and 2."
-        assert "Enter a number to select player type for X:" in captured.out
+        input_prompt = "Enter a number to select player type for X:"
+        assert 9 == captured.out.count(input_prompt)
         assert "1. Human" in captured.out
         assert "2. Hard AI" in captured.out
         assert "Enter selection: " in captured.out
-        assert 4 == captured.out.count(invalid_message)
+        assert 8 == captured.out.count(invalid_message)
 
 class TestInterleaveNumbers:
     def test_print_full_board(self, board, notify):
