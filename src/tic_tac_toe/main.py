@@ -1,18 +1,15 @@
 from tic_tac_toe.board import Board
 from tic_tac_toe.console import CliNotifier
 from tic_tac_toe.game import Game
-from tic_tac_toe.player.ai_player import HardAI
-from tic_tac_toe.player.human_player import HumanPlayer
+from tic_tac_toe.player_factory import PlayerFactory
 
 
 def main():
     notifier = CliNotifier()
     notifier.render_welcome()
     board = Board()
-    players = {
-        Board.PLAYER_X: HumanPlayer(Board.PLAYER_X),
-        Board.PLAYER_O: HardAI(Board.PLAYER_O),
-    }
+    player_factory = PlayerFactory(notifier)
+    players = player_factory.create_players()
     game = Game(board, players, notifier)
     game.play()
 
