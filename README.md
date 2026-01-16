@@ -23,11 +23,23 @@ Download and install [Python](https://www.python.org/downloads/) using the insta
 ### Get the Game
 
 Clone the repository:
+For macOS & Linux:
 ```
 git clone https://github.com/7vanael/tic-tac-tython.git
-cd tic-tac-tython
+cd TicTacTython
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
+for Windows:
 
+```
+git clone https://github.com/7vanael/tic-tac-tython.git
+cd TicTacTython
+python -m venv .venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## Usage
 
