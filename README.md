@@ -27,7 +27,7 @@ For macOS & Linux:
 ```
 git clone https://github.com/7vanael/tic-tac-tython.git
 cd tic-tac-tython
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
