@@ -26,14 +26,9 @@ class Board:
         return self.EMPTY not in self.cells
 
     def winner(self):
-        for combination in self.WIN_COMBINATIONS:
-            a = combination[0]
-            b = combination[1]
-            c = combination[2]
-
-            if self.cells[a] != self.EMPTY:
-                if self.cells[a] == self.cells[b] and self.cells[b] == self.cells[c]:
-                    return self.cells[a]
+        for a, b, c in self.WIN_COMBINATIONS:
+            if self.cells[a] != self.EMPTY and self.cells[a] == self.cells[b] == self.cells[c]:
+                return self.cells[a]
         return None
 
     def is_end_state(self) -> bool:
