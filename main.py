@@ -8,13 +8,13 @@ def main():
     notifier = CliNotifier()
     notifier.render_welcome()
     player_factory = PlayerFactory(notifier)
-    playing = True
-    while playing:
+    is_playing = True
+    while is_playing:
         board = Board()
         players = player_factory.create_players()
         game = Game(board, players, notifier)
         game.play()
-        playing = notifier.play_again()
+        is_playing = notifier.play_again()
 
 if __name__ == '__main__':
     main()
