@@ -8,7 +8,7 @@ play against an unbeatable computer opponent. Good luck!
 ### Prerequisites
 
 Check if you have Python 3 installed (minimum version 3.10 required):
-`python3 --version`
+`python --version`
 
 If not installed, you have a couple options:
 
@@ -27,18 +27,18 @@ For macOS & Linux:
 ```
 git clone https://github.com/7vanael/tic-tac-tython.git
 cd tic-tac-tython
-python3 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
-for Windows:
+for Windows CMD:
 
 ```
 git clone https://github.com/7vanael/tic-tac-tython.git
 cd tic-tac-tython
 python -m venv .venv
 .\.venv\Scripts\activate.bat
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 ## Usage
@@ -49,9 +49,16 @@ To play the game:
 ### Running Tests
 
 Run all tests:
-
+macOS/Linux:
 `pytest -v`
+
+Windows:
+`python -m pytest -v`
 
 Run a specific test file:
 
 `pytest tests/test_board.py -v`
+
+### Exiting
+
+To exit the virtual environment (.venv) run `deactivate`
