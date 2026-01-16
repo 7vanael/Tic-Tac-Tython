@@ -26,7 +26,7 @@ Clone the repository:
 For macOS & Linux:
 ```
 git clone https://github.com/7vanael/tic-tac-tython.git
-cd TicTacTython
+cd tic-tac-tython
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -35,9 +35,9 @@ for Windows:
 
 ```
 git clone https://github.com/7vanael/tic-tac-tython.git
-cd TicTacTython
+cd tic-tac-tython
 python -m venv .venv
-.\venv\Scripts\activate
+.\.venv\Scripts\activate.bat
 pip install -r requirements.txt
 ```
 
@@ -45,11 +45,6 @@ pip install -r requirements.txt
 
 To play the game:
 `python main.py`
-
-## Development
-
-For development dependencies:
-`pip install -r requirements.txt`
 
 ### Running Tests
 

@@ -39,7 +39,7 @@ def test_random_player_respects_taken_positions(board, random_x):
     assert move not in [0, 4]
 
 def test_random_player_uses_available_moves(board, random_x):
-    with patch("player_easy_ai .random.choice") as mock_choice:
+    with patch("player_easy_ai.random.choice") as mock_choice:
         mock_choice.return_value = 2
         random_x.select_move(board)
 
