@@ -8,7 +8,7 @@ play against an unbeatable computer opponent. Good luck!
 ### Prerequisites
 
 Check if you have Python 3 installed (minimum version 3.10 required):
-`python --version`
+`python3 --version`
 
 If not installed, you have a couple options:
 
