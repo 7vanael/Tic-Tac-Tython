@@ -2,6 +2,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 from player_ai import HardAI
 from player_human import HumanPlayer
+from player_easy_ai import EasyAi
 from tests.conftest import EmptyFakePlayer
 from player_factory import PlayerFactory
 from board import Board
@@ -19,6 +20,7 @@ def test_get_player_type_options_returns_labels(factory):
     options = factory.PLAYER_TYPES
     assert options == {
         "Human": HumanPlayer,
+        "Easy AI": EasyAi,
         "Hard AI": HardAI,
     }
 
@@ -36,7 +38,7 @@ def test_create_player_hard_ai(factory):
 
 def test_create_player_unknown_type_raises(factory):
     with pytest.raises(ValueError, match="Unknown player type"):
-        factory._create_player(Board.PLAYER_X, EmptyFakePlayer)
+        factory._create_player(Board.PLAYER_X, "foobar")
 
 def test_create_players_human_vs_hard_ai(factory, notifier):
     notifier.select_player_type.side_effect = ["Human", "Fake Player"]

@@ -1,11 +1,13 @@
 from board import Board
 from player_ai import HardAI
+from player_easy_ai import EasyAi
 from player_human import HumanPlayer
 
 
 class PlayerFactory:
     PLAYER_TYPES = {
         "Human": HumanPlayer,
+        "Easy AI": EasyAi,
         "Hard AI": HardAI,
     }
 
