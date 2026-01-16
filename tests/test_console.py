@@ -110,3 +110,46 @@ def test_announce_move_announces_player_move_plus_1(capsys, notify):
     notify.announce_move(Board.PLAYER_X, 3)
     captured = capsys.readouterr()
     assert captured.out == "X chose move 4\n\n"
+
+def test_play_again_true(capsys, notify):
+    with patch("builtins.input", side_effect=["5", "hey", "y"]) as mock_input:
+        answer = notify.play_again()
+        assert True == answer
+        captured = capsys.readouterr()
+        invalid_message = "Invalid input"
+        assert invalid_message in captured.out
+        assert 2 == captured.out.count(invalid_message)
+        mock_input.assert_called_with("Would you like to play again? (y/n)\n")
+        assert mock_input.call_count == 3
+
+
+def test_play_again_false(capsys, notify):
+    with patch("builtins.input", side_effect=["-3", " ", "n"]) as mock_input:
+        answer = notify.play_again()
+        assert False == answer
+        mock_input.assert_called_with("Would you like to play again? (y/n)\n")
+        assert mock_input.call_count == 3
+        invalid_message = "Invalid input"
+        captured = capsys.readouterr()
+        assert invalid_message in captured.out
+        assert 2 == captured.out.count(invalid_message)
+
+def test_play_again_retry_limit(capsys, notify):
+    with patch("builtins.input", side_effect=["-3", "*", "7", "", "foo"]) as mock_input:
+        answer = notify.play_again()
+        assert False == answer
+        assert mock_input.call_count == 4
+        captured = capsys.readouterr()
+        invalid_message = "Invalid input"
+        assert captured.out.count(invalid_message) == 4
+        assert "Too many invalid attempts, I'll assume that's a no! See ya!" in captured.out
+
+@pytest.mark.parametrize("yesses", ["yes", "y", "yeah", "Y", "Yes", "YES"])
+def test_play_again_true_options(capsys, notify, yesses):
+    with patch("builtins.input", return_value=yesses):
+        assert True == notify.play_again()
+
+@pytest.mark.parametrize("nos", ["no", "n", "nah", "N", "No", "NO"])
+def test_play_again_true_options(capsys, notify, nos):
+    with patch("builtins.input", return_value=nos):
+        assert False == notify.play_again()

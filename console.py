@@ -55,3 +55,15 @@ class CliNotifier:
     @staticmethod
     def announce_move(character: str, move: int):
         print(f"{character} chose move {move + 1}\n")
+
+    def play_again(self, retries=4) -> bool:
+        while retries > 0:
+            answer = input("Would you like to play again? (y/n)\n")
+            if answer in {"y", "Y", "yes", "Yes", "YES"}:
+                return True
+            if answer in {"n", "N", "no", "No", "NO"}:
+                return False
+            print("Invalid input")
+            retries -= 1
+        print("Too many invalid attempts, I'll assume that's a no! See ya!")
+        return False

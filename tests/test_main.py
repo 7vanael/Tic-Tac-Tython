@@ -34,6 +34,7 @@ class TestMain:
         fake_player_x = FakePlayer("X",mock_notifier_instance, [1, 2, 3])
         fake_player_o = FakePlayer("O", mock_notifier_instance,[4, 5, 6])
         mock_factory_instance.create_players.return_value = {"X": fake_player_x, "O": fake_player_o}
+        mock_notifier_instance.play_again.return_value = False
 
         main()
 
@@ -45,3 +46,22 @@ class TestMain:
             mock_notifier_instance,
         )
         mock_game_instance.play.assert_called_once()
+
+    def test_main_loops_when_play_again_returns_true(self, mock_notifier, mock_game_class, mock_player_factory,mock_board):
+        mock_notifier_instance = mock_notifier.return_value
+        mock_game_instance = mock_game_class.return_value
+        mock_factory_instance = mock_player_factory.return_value
+
+        fake_player_x = FakePlayer("X", mock_notifier_instance, [1, 2, 3])
+        fake_player_o = FakePlayer("O", mock_notifier_instance, [4, 5, 6])
+        mock_factory_instance.create_players.return_value = {"X": fake_player_x, "O": fake_player_o}
+
+        mock_notifier_instance.play_again.side_effect = [True, False]
+
+        main()
+
+        assert mock_game_instance.play.call_count == 2
+        assert mock_factory_instance.create_players.call_count == 2
+        assert mock_notifier_instance.play_again.call_count == 2
+        assert mock_notifier.call_count == 1
+        assert mock_player_factory.call_count == 1
